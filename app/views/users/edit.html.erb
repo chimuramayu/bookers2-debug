@@ -1,0 +1,30 @@
+<div class="col-md-6 col-md-offset-3">
+	<h2>User info</h2>
+	<%= form_for(@user) do |f| %>
+		<!-- エラーメッセージ表示-->
+		<% if @user.errors.any? %>
+			<h3><%= @user.errors.count %>error occurrence</h3>
+			<ul>
+				<% @user.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		<% end %>
+		<!-- エラーメッセージ表示-->
+		<div class="field row">
+			<%= f.label :name %>
+			<%= f.text_field :name, class:"col-xs-12 name" %>
+		</div>
+		<div class="field row">
+			<%= f.label :image %>
+			<%= f.attachment_field :profile_image, class:"image" %>
+		</div>
+		<div class="field row">
+			<%= f.label :introduction %>
+			<%= f.text_area :introduction, class:"col-xs-12 introduciton" %>
+		</div>
+		<div class="actions row">
+			<%= f.submit class:"btn btn-primary col-xs-12" %>
+		</div>
+	<% end %>
+</div>
