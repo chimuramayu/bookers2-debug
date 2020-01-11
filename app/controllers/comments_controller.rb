@@ -1,6 +1,4 @@
 class CommentsController < ApplicationController
-	before_action :ensure_correct_user,{only: [:destroy]}
-
 	def create
 		book = Book.find(params[:book_id])
 		# comment = Comment.new(comment_params)
@@ -22,12 +20,4 @@ class CommentsController < ApplicationController
 	def comment_params
 		params.require(:comment).permit(:comment)
 	end
-
-	def ensure_correct_user
-    comment = Comment.find(params[:id])
-    if current_user.id != comment.user_id
-      redirect_to books_path
-    end
-  end
-
 end
