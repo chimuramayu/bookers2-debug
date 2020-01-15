@@ -1,42 +1,10 @@
 <div class="row">
-	<h2>検索結果</h2>
+	<h2>検索結果<span>(<%= @model %>)</span></h2>
 	<% if @model == "user" %>
-		<table class="table table-hover">
-			<p>"<%= @search %>"</p>
-			<thead>
-				<th>images</th>
-				<th>name</th>
-				<th>introduction</th>
-			</thead>
-			<% @results.each do |result| %>
-				<tbody>
-					<td><%= attachment_image_tag(result, :profile_image, fallback: "noimage.png", :size =>'50x50') %></td>
-					<td>
-						<%= link_to user_path(result) do %>
-							<strong><%= result.name %></strong>
-						<% end %>
-					</td>
-					<td><%= result.introduction %></td>
-				</tbody>
-			<% end %>
-		</table>
+		<p>"<%= @search %>"</p>
+		<%= render 'users/users_index', users: @results %>
 	<% elsif @model == "book" %>
-		<table class="table table-hover">
-			<p>"<%= @search %>"</p>
-			<thead>
-				<th>title</th>
-				<th>opinion</th>
-			</thead>
-			<% @results.each do |result| %>
-				<tbody>
-					<td>
-						<%= link_to book_path(result) do %>
-							<%= result.title %>
-						<% end %>
-					</td>
-					<td><%= result.body %></td>
-				</tbody>
-			<% end %>
-		</table>
+		<p>"<%= @search %>"</p>
+		<%= render 'books/book_index', books: @results %>
 	<% end %>
 </div>
