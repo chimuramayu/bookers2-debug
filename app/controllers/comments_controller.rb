@@ -2,22 +2,21 @@ class CommentsController < ApplicationController
 	before_action :authenticate_user!
 
 	def create
-		book = Book.find(params[:book_id])
+		@book = Book.find(params[:book_id])
+		@comment = Comment.new
 		# comment = Comment.new(comment_params)
 		# comment.user_id = current_user.id
 		# comment.book_id = book.id
 		# comment.save
-		Comment.create(user_id: current_user.id, book_id:  book.id, comment: comment_params[:comment])
-		redirect_to request.referer
+		Comment.create(user_id: current_user.id, book_id: @book.id, comment: comment_params[:comment])
 	end
 
 	def destroy
-		comment = Comment.find(params[:id])
-		if comment.user != current_user
-			redirect_to request.referer
+		@book = Book.find(params[:book_id])
+		@comment = Comment.find(params[:id])
+		if @comment.user == current_user
+			@comment.destroy
 		end
-		comment.destroy
-		redirect_to request.referer
 	end
 
 	private

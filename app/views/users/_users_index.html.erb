@@ -7,26 +7,27 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% users.each do |user| %>
 			<tr>
 				<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "noimage.png", size: "50x50") %></td>
-				<td><%= user.name %></td>
-				<td>フォロー数：<%= user.followings.count %></td>
-				<td>フォロワー数：<%= user.followers.count %></td>
+				<td>
+					<strong><%= link_to user.name, user_path(user) %></strong></td>
+				<td>
+					<strong><%= user.followings.count %></strong> フォロー中</td>
+				<td>
+					<strong><%= user.followers.count %></strong> フォロワー</td>
 				<td>
 					<% unless user == current_user %>
-				    <% if current_user.following?(user) %>
-				      <p><%= link_to "フォローを外す", relationships_path(user.id), method: :delete %></p>
-				    <% else %>
-				      <p><%= link_to "フォローする", relationships_path(user.id), method: :post, class: "btn-sm btn-primary" %></p>
-				    <% end %>
+					    <% if current_user.following?(user) %>
+					      <p><%= link_to "フォロー中", relationships_path(user.id), method: :delete, class: "btn btn-primary" %></p>
+					    <% else %>
+					      <p><%= link_to "フォロー", relationships_path(user.id), method: :post, class: "btn btn-default" %></p>
+					    <% end %>
 					<% end %>
 				</td>
-				<td><%= link_to "show", user_path(user), class: "user_#{user.id}" %></td>
 			</tr>
 			<% end %>
 		</tbody>
