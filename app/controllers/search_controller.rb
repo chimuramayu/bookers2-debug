@@ -8,30 +8,34 @@ def search
 	@results = detail(@search, @model, @match)
 end
 
-	def detail(search, model, match)
+def detail(search, model, match)
 	if @model == "user"
-		if match == "perfect_match"
-			User.where("#{search}")
-		elsif match == "partial_match"
-			User.where("name LIKE?","%#{search}%")
-		elsif match == "forward_match"
-			User.where("name LIKE?","#{search}%")
-		elsif match == "backward_match"
-			User.where("name LIKE?","%#{search}")
-		else
+		if @search.blank?
 			User.all
+		else
+			if match == "perfect_match"
+				User.where(name: search)
+			elsif match == "partial_match"
+				User.where("name LIKE?", "%#{search}%")
+			elsif match == "forward_match"
+				User.where("name LIKE?", "#{search}%")
+			elsif match == "backward_match"
+				User.where("name LIKE?", "%#{search}")
+			end
 		end
 	elsif	@model == "book"
-		if match == "perfect_match"
-			Book.where("#{search}")
-		elsif match == "partial_match"
-			Book.where("title LIKE?","%#{search}%")
-		elsif match == "forward_match"
-			Book.where("title LIKE?","#{search}%")
-		elsif match == "backward_match"
-			Book.where("title LIKE?","%#{search}")
-		else
+		if @search.blank?
 			Book.all
+		else
+			if match == "perfect_match"
+				Book.where(title: search).or(Book.where(body: search))
+			elsif match == "partial_match"
+				Book.where("title LIKE? OR body LIKE?", "%#{search}%", "%#{search}%")
+			elsif match == "forward_match"
+				Book.where("title LIKE? OR body LIKE?", "#{search}%", "#{search}%")
+			elsif match == "backward_match"
+				Book.where("title LIKE? OR body LIKE?", "%#{search}", "%#{search}")
+			end
 		end
 	end
 end
