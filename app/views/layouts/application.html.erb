@@ -37,9 +37,23 @@
     <!--ヘッダーの記述-->
     <div class="container">
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
+      <!-- 検索窓 -->
+      <% if signed_in? %>
+        <div class="search form-group form-inline">
+          <%= form_tag(search_path, method: :get) do %>
+            <%= text_field_tag :search, '', class: "form-control", placeholder: "word" %>
+            <%= select_tag :model, options_for_select("user" => "user", "book" => "book"), class: "form-control" %>
+            <%= select_tag :match, options_for_select("完全一致" => "perfect_match", "部分一致" => "partial_match", "前方一致" => "forward_match", "後方一致" => "backward_match"), class: "form-control" %>
+            <%= submit_tag '検索', class: "" %>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- 検索窓 -->
       <%= yield %>
     </div>
+    <!-- フッター -->
     <footer class="">
     </footer>
+    <!-- フッター -->
   </body>
 </html>

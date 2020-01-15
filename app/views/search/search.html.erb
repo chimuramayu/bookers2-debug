@@ -1,0 +1,12 @@
+<div class="row">
+	<h2>検索結果</h2>
+		<% if @model == "user" %>
+			<% @results.each do |result| %>
+				<%= result.name %>
+			<% end %>
+		<% elsif @model == "book" %>
+			<% @results.each do |result| %>
+				<%= result.title %>
+			<% end %>
+		<% end %>
+</div>

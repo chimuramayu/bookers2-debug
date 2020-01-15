@@ -13,18 +13,18 @@
 		<!-- エラーメッセージ表示-->
 		<div class="field row">
 			<%= f.label :name %>
-			<%= f.text_field :name, class:"col-xs-12 name" %>
+			<%= f.text_field :name, class: "col-xs-12 form-control name" %>
 		</div>
 		<div class="field row">
 			<%= f.label :image %>
-			<%= f.attachment_field :profile_image, class:"image" %>
+			<%= f.attachment_field :profile_image, class: "image" %>
 		</div>
 		<div class="field row">
 			<%= f.label :introduction %>
-			<%= f.text_area :introduction, class:"col-xs-12 introduciton" %>
+			<%= f.text_area :introduction, class: "col-xs-12 form-control introduciton" %>
 		</div>
 		<div class="actions row">
-			<%= f.submit class:"btn btn-primary col-xs-12" %>
+			<%= f.submit class: "btn btn-primary col-xs-12" %>
 		</div>
 	<% end %>
 </div>

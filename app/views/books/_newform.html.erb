@@ -13,11 +13,11 @@
 	<!--エラーメッセージ-->
 	<div class="field row">
 		<%= f.label :title %>
-		<%= f.text_field :title, class: "col-xs-12 book_title" %>
+		<%= f.text_field :title, class: "col-xs-12 book_title form-control" %>
 	</div>
 	<div class="field row">
 		<%= f.label :body %> <!-- ここを変更 -->
-		<%= f.text_area :body, class: "col-xs-12 book_body" %>
+		<%= f.text_area :body, rows: 5, class: "col-xs-12 book_body form-control" %>
 	</div>
 	<div class="actions row">
 		<%= f.submit class: "btn btn-primary col-xs-12" %>
