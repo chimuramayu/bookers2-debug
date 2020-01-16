@@ -38,7 +38,7 @@
 			</tr>
 		</table>
 		<div id="comments_<%= @book.id %>">
-			<%= render 'comments/comment', book: @book, comment: @comment %>
+			<%= render 'comments/comment', book: @book %>
 		</div>
 		<div class="comment form-group form-inline">
 			<%= form_with(model: [@book, @comment]) do |f| %>
